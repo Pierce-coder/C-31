@@ -14,6 +14,39 @@ function preload() {
 }
 
 function setup(){
+    // 
+    var number = 1;
+    //console.log(number);
+    var string = "Pierce";
+    //console.log(string);
+    //boolean datatype
+    var like  = true;
+    var dislike  = false;
+    
+    var object  = null;
+    //console.log(object);
+    //              0       1       2
+    var array = ["Preetha","Fynn","JOSH"];
+    console.log(array);
+    
+    var array1 = [1,"Pierce","Sushi" , like];
+    var array2 = [2,"Pierce","Pizza" , dislike];
+
+    console.log(array[0]);
+    console.log(array[1]);
+    console.log(array[2]);
+    console.log(array[3]);
+    console.log(array1[1]);
+    console.log(array2[2]);
+    console.log(array1[2]);
+    console.log(array2[1]);
+    //                      0           1
+    var birdPosition = [[200,100], [300,100], [400,100]];
+    console.log(birdPosition[2]);
+
+    
+    var gameState= "yettostart";
+
     var canvas = createCanvas(1200,400);
     engine = Engine.create();
     world = engine.world;
@@ -22,7 +55,7 @@ function setup(){
     ground = new Ground(600,height,1200,20);
     platform = new Ground(150, 305, 300, 170);
 
-    box1 = new Box(700,320,70,70);
+    box1 = new Box(700,320,70,70); 
     box2 = new Box(920,320,70,70);
     pig1 = new Pig(810, 350);
     log1 = new Log(810,260,300, PI/2);
@@ -64,17 +97,19 @@ function draw(){
 
     bird.display();
     platform.display();
-    //log6.display();
     slingshot.display();    
 }
 
 function mouseDragged(){
-    Matter.Body.setPosition(bird.body, {x: mouseX , y: mouseY});
+    if (gameState !== "play") {
+        Matter.Body.setPosition(bird.body, {x: mouseX , y: mouseY});    
+    }
 }
 
 
 function mouseReleased(){
     slingshot.fly();
+    gameState = "play";
 }
 
 function keyPressed(){
